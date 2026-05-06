@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How Tramm Works — Tramm Help</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue-50:  #eff6ff;
+      --blue-100: #dbeafe;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      --blue-900: #1e3a8a;
+      --slate-50:  #f8fafc;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-700: #334155;
+      --slate-900: #0f172a;
+      --green-100: #dcfce7;
+      --green-700: #15803d;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--slate-100);
+      color: var(--slate-700);
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+      color: #fff;
+      padding: 2rem 2rem 1.75rem;
+    }
+    .breadcrumb {
+      font-size: 0.78rem;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .breadcrumb a { color: #fff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 0.4rem; opacity: 0.5; }
+    .site-header h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+    .site-header .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      max-width: 65ch;
+    }
+
+    /* ── MAIN ── */
+    .content {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 4rem;
+    }
+
+    .section-intro {
+      font-size: 0.95rem;
+      color: var(--slate-500);
+      margin-bottom: 2rem;
+      max-width: 70ch;
+    }
+
+    /* ── CARDS ── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+    .card {
+      background: #fff;
+      border: 1px solid var(--slate-200);
+      border-left: 4px solid var(--blue-500);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      transition: box-shadow 0.15s, transform 0.15s;
+    }
+    .card:hover {
+      box-shadow: 0 4px 16px rgba(30,58,138,0.1);
+      transform: translateY(-2px);
+    }
+    .card h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+    .card p {
+      font-size: 0.85rem;
+      color: var(--slate-500);
+      line-height: 1.5;
+      flex: 1;
+    }
+    .card .tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 9999px;
+      margin-top: 0.25rem;
+    }
+    .tag-available { background: var(--green-100); color: var(--green-700); }
+    .tag-coming { background: var(--slate-100); color: var(--slate-500); }
+
+    footer {
+      background: var(--slate-900);
+      color: var(--slate-400);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 600px) {
+      .site-header h1 { font-size: 1.4rem; }
+      .content { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Tramm Help</a>
+      <span>›</span>
+      How Tramm Works
+    </div>
+    <h1>How Tramm Works</h1>
+    <p class="subtitle">Understand the system — core concepts, data model, business rules, and how different parts of Tramm interact.</p>
+  </header>
+
+  <main class="content">
+    <p class="section-intro">This section is for anyone who wants to understand what Tramm does and why — not just how to click buttons. It's particularly useful during implementation, when you need to map Tramm's behaviour to your own business processes.</p>
+
+    <div class="card-grid">
+
+      <a class="card" href="key-concepts.html">
+        <h2>Key Concepts</h2>
+        <p>The core data model — what Orders, Jobs, Trips, Stops and Activities are, and how they relate to each other.</p>
+        <span class="tag tag-available">Available</span>
+      </a>
+
+      <a class="card" href="master-data.html">
+        <h2>Reference Data</h2>
+        <p>Vehicles, Sites, Operators, Products and other master data that the system uses to plan and execute transport.</p>
+        <span class="tag tag-coming">Coming soon</span>
+      </a>
+
+      <a class="card" href="business-rules.html">
+        <h2>Business Rules</h2>
+        <p>How Tramm makes decisions — the rules that govern state changes, scheduling constraints, and system behaviour.</p>
+        <span class="tag tag-coming">Coming soon</span>
+      </a>
+
+      <a class="card" href="scenarios.html">
+        <h2>Common Scenarios</h2>
+        <p>Answers to "what happens if..." questions — edge cases and real-world scenarios explained.</p>
+        <span class="tag tag-coming">Coming soon</span>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>Tramm Help &mdash; for support, contact your Tramm implementation team.</p>
+  </footer>
+
+</body>
+</html>

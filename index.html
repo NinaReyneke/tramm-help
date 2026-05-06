@@ -227,6 +227,54 @@
       letter-spacing: 0.08em;
     }
 
+    /* ── START HERE BANNER ── */
+    .start-here {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .start-here-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      background: rgba(255,255,255,0.15);
+      border-radius: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .start-here-icon svg { width: 1.75rem; height: 1.75rem; }
+    .start-here-body h2 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.35rem;
+    }
+    .start-here-body p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      max-width: 55ch;
+      margin-bottom: 1rem;
+    }
+    .start-here-link {
+      display: inline-block;
+      background: #fff;
+      color: var(--blue-700);
+      text-decoration: none;
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 0.5rem 1.25rem;
+      border-radius: 0.375rem;
+      transition: background 0.15s, transform 0.15s;
+    }
+    .start-here-link:hover {
+      background: var(--blue-50);
+      transform: translateY(-1px);
+    }
+
     /* ── WHAT'S NEW BANNER ── */
     .whats-new-banner {
       background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
@@ -315,6 +363,7 @@
 
   <!-- SECTION NAV -->
   <nav class="section-nav" aria-label="Page sections">
+    <a href="#overview">New to Tramm?</a>
     <a href="#apps">Apps</a>
     <a href="#how-tramm-works">How Tramm Works</a>
     <a href="#whats-new">What's New</a>
@@ -322,6 +371,23 @@
 
   <!-- MAIN CONTENT -->
   <main class="content">
+
+    <!-- START HERE -->
+    <section id="overview">
+      <div class="start-here">
+        <div class="start-here-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/>
+          </svg>
+        </div>
+        <div class="start-here-body">
+          <h2>New to Tramm? Start here.</h2>
+          <p>See how Tramm covers the full logistics operation — from order creation to delivery — and explore how the different apps fit together.</p>
+          <a class="start-here-link" href="overview.html">See the Tramm Overview &rarr;</a>
+        </div>
+      </div>
+    </section>
 
     <!-- APPS -->
     <section id="apps">
@@ -348,7 +414,7 @@
         </a>
 
         <!-- Planner -->
-        <a class="app-card" href="planner-quick-reference.html">
+        <a class="app-card" href="planner/index.html">
           <div class="app-card-icon">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 11l19-9-9 19-2-8-8-2z"/>
@@ -408,7 +474,7 @@
         <a class="works-card" href="how-tramm-works/key-concepts.html">
           <h3>Key Concepts</h3>
           <p>Orders, Jobs, Trips — what they mean and how they relate to each other.</p>
-          <span class="coming-label">Coming soon</span>
+          <span class="tag tag-available" style="margin-top:0.5rem;">Available</span>
         </a>
 
         <a class="works-card" href="how-tramm-works/processes.html">

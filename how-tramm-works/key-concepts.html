@@ -26,15 +26,19 @@
       --slate-900: #0f172a;
       --green-50:  #f0fdf4;
       --green-100: #dcfce7;
+      --green-500: #22c55e;
       --green-700: #15803d;
       --amber-50:  #fffbeb;
       --amber-100: #fef3c7;
+      --amber-500: #f59e0b;
       --amber-700: #b45309;
       --purple-50: #faf5ff;
       --purple-100: #f3e8ff;
+      --purple-500: #8b5cf6;
       --purple-700: #7e22ce;
       --teal-50:  #f0fdfa;
       --teal-100: #ccfbf1;
+      --teal-500: #14b8a6;
       --teal-700: #0f766e;
       --rose-50:  #fff1f2;
       --rose-100: #ffe4e6;
@@ -124,10 +128,11 @@
       flex-direction: column;
       align-items: center;
       gap: 0;
-      padding: 2rem 1rem;
-      background: #fff;
-      border: 1px solid var(--slate-200);
+      padding: 2rem 1.5rem;
+      background: var(--slate-50);
+      border: 2px solid var(--slate-300);
       border-radius: 0.75rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     }
     .hierarchy-row {
       display: flex;
@@ -137,17 +142,18 @@
     }
     .hierarchy-box {
       width: 100%;
-      max-width: 380px;
+      max-width: 420px;
       border-radius: 0.5rem;
       padding: 1rem 1.25rem;
       text-align: center;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.09);
     }
     .hierarchy-box .label {
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      opacity: 0.65;
+      opacity: 0.7;
       margin-bottom: 0.2rem;
     }
     .hierarchy-box .name {
@@ -157,20 +163,21 @@
     }
     .hierarchy-box .desc {
       font-size: 0.8rem;
-      opacity: 0.8;
+      opacity: 0.85;
     }
     .hierarchy-arrow {
-      font-size: 1.3rem;
-      color: var(--slate-300);
-      margin: 0.35rem 0;
+      font-size: 1.5rem;
+      color: var(--slate-500);
+      margin: 0.3rem 0;
       line-height: 1;
+      font-weight: 700;
     }
 
-    .box-order    { background: var(--blue-50);   color: var(--blue-900);   border: 1px solid var(--blue-200);   }
-    .box-job      { background: var(--purple-50);  color: var(--purple-700); border: 1px solid var(--purple-100); }
-    .box-trip     { background: var(--teal-50);    color: var(--teal-700);   border: 1px solid var(--teal-100);   }
-    .box-stop     { background: var(--green-50);   color: var(--green-700);  border: 1px solid var(--green-100);  }
-    .box-activity { background: var(--amber-50);   color: var(--amber-700);  border: 1px solid var(--amber-100);  }
+    .box-order    { background: var(--blue-50);   color: var(--blue-900);   border: 2px solid var(--blue-500);   }
+    .box-job      { background: var(--purple-50);  color: var(--purple-700); border: 2px solid var(--purple-500); }
+    .box-trip     { background: var(--teal-50);    color: var(--teal-700);   border: 2px solid var(--teal-500);   }
+    .box-stop     { background: var(--green-50);   color: var(--green-700);  border: 2px solid var(--green-500);  }
+    .box-activity { background: var(--amber-50);   color: var(--amber-700);  border: 2px solid var(--amber-500);  }
 
     /* ── THREE PRODUCTS ── */
     .product-grid {

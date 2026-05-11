@@ -6,7 +6,7 @@
   <title>Key Concepts — How Tramm Works — Tramm Help</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-padding-top: 56px; }
+    html { scroll-padding-top: 20px; }
 
     :root {
       --blue-50:  #eff6ff;
@@ -71,40 +71,60 @@
     .site-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.4rem; }
     .site-header .subtitle { font-size: 0.95rem; opacity: 0.85; max-width: 65ch; }
 
-    /* ── SECTION NAV ── */
-    .section-nav {
+    /* ── PAGE LAYOUT ── */
+    .page-layout {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    /* ── SIDEBAR NAV ── */
+    .sidebar-nav {
+      width: 220px;
+      flex-shrink: 0;
       position: sticky;
       top: 0;
-      z-index: 100;
+      height: 100vh;
+      overflow-y: auto;
       background: #fff;
-      border-bottom: 2px solid var(--slate-200);
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-      padding: 0 2rem;
+      border-right: 1px solid var(--slate-200);
+      padding: 1.75rem 0 2rem;
     }
-    .section-nav a {
+    .sidebar-heading {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--slate-400);
+      padding: 0 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+    .sidebar-nav a {
       display: block;
-      padding: 0.85rem 1.1rem;
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--slate-500);
+      padding: 0.42rem 1.25rem;
+      font-size: 0.855rem;
+      font-weight: 500;
+      color: var(--slate-600);
       text-decoration: none;
-      border-bottom: 3px solid transparent;
-      margin-bottom: -2px;
-      white-space: nowrap;
-      transition: color 0.15s, border-color 0.15s;
+      border-left: 3px solid transparent;
+      transition: color 0.15s, background 0.15s, border-color 0.15s;
     }
-    .section-nav a:hover {
-      color: var(--blue-600);
-      border-bottom-color: var(--blue-200);
+    .sidebar-nav a:hover {
+      color: var(--blue-700);
+      background: var(--blue-50);
+      border-left-color: var(--blue-200);
+    }
+    .sidebar-nav a.active {
+      color: var(--blue-700);
+      background: var(--blue-50);
+      border-left-color: var(--blue-600);
+      font-weight: 600;
     }
 
     /* ── MAIN ── */
     .content {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 2.5rem 2rem 5rem;
+      flex: 1;
+      min-width: 0;
+      padding: 2.5rem 2.5rem 5rem;
       display: flex;
       flex-direction: column;
       gap: 3rem;
@@ -726,9 +746,42 @@
     }
 
     @media (max-width: 700px) {
+      html { scroll-padding-top: 50px; }
       .site-header h1 { font-size: 1.4rem; }
+      .page-layout { flex-direction: column; }
+      .sidebar-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        width: 100%;
+        height: auto;
+        border-right: none;
+        border-bottom: 2px solid var(--slate-200);
+        padding: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: stretch;
+        overflow-x: auto;
+        overflow-y: hidden;
+      }
+      .sidebar-heading { display: none; }
+      .sidebar-nav a {
+        white-space: nowrap;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        margin-bottom: -2px;
+        padding: 0.75rem 0.85rem;
+        font-size: 0.8rem;
+        border-radius: 0;
+      }
+      .sidebar-nav a:hover,
+      .sidebar-nav a.active {
+        background: transparent;
+        border-left-color: transparent;
+        border-bottom-color: var(--blue-600);
+        color: var(--blue-700);
+      }
       .content { padding: 1.5rem 1rem 3rem; }
-      .section-nav a { padding: 0.75rem 0.75rem; font-size: 0.8rem; }
       .product-grid { grid-template-columns: 1fr; }
       .activity-types { grid-template-columns: 1fr 1fr; }
       .trip-diagrams { grid-template-columns: 1fr; }
@@ -749,7 +802,10 @@
     <p class="subtitle">Tramm is three products working as one system — from the moment an order is created to the moment it is delivered and confirmed. This page explains how everything fits together.</p>
   </header>
 
-  <nav class="section-nav" aria-label="Page sections">
+  <div class="page-layout">
+
+  <nav class="sidebar-nav" aria-label="Page sections">
+    <p class="sidebar-heading">On this page</p>
     <a href="#overview">Overview</a>
     <a href="#three-products">Three Products</a>
     <a href="#orders">Orders</a>
@@ -1703,9 +1759,30 @@
 
   </main>
 
+  </div><!-- /page-layout -->
+
   <footer>
     <p>Tramm Help &mdash; for support, contact your Tramm implementation team.</p>
   </footer>
+
+  <script>
+    const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
+    const sections = Array.from(navLinks)
+      .map(a => document.querySelector(a.getAttribute('href')))
+      .filter(Boolean);
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navLinks.forEach(a => a.classList.remove('active'));
+          const link = document.querySelector(`.sidebar-nav a[href="#${entry.target.id}"]`);
+          if (link) link.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-5% 0px -88% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
 
 </body>
 </html>

@@ -94,7 +94,6 @@
     .intro-text {
       font-size: 0.975rem;
       color: var(--slate-600);
-      max-width: 70ch;
       line-height: 1.7;
     }
 
@@ -127,7 +126,7 @@
     }
     .info-card ul { padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.3rem; }
 
-    /* ── CONSTRAINT TABLE ── */
+    /* ── CONSTRAINT GROUPS ── */
     .constraint-group { margin-bottom: 1.75rem; }
     .constraint-group:last-child { margin-bottom: 0; }
     .constraint-group-title {
@@ -138,19 +137,24 @@
       color: var(--slate-500);
       margin-bottom: 0.6rem;
     }
-    .pill-list {
+    .check-list {
       display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
+      flex-direction: column;
+      gap: 0.4rem;
     }
-    .pill {
-      background: var(--blue-50);
-      border: 1px solid var(--blue-100);
-      color: var(--blue-700);
-      font-size: 0.8rem;
-      font-weight: 500;
-      padding: 0.3rem 0.75rem;
-      border-radius: 2rem;
+    .check-list li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.6rem;
+      font-size: 0.875rem;
+      color: var(--slate-700);
+      list-style: none;
+    }
+    .check-list li::before {
+      content: '✓';
+      color: var(--green-700);
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
     /* ── LIMITATIONS ── */
@@ -236,7 +240,7 @@
     <!-- OVERVIEW -->
     <section>
       <p class="section-label">Overview</p>
-      <p class="intro-text">Chora is Opsi's purpose-built route optimisation solver. It replaces general-purpose solvers and is designed specifically for the complexity of real-world logistics — multiple vehicle types, time windows, capacity constraints, fatigue rules, and loading bay management. Chora runs as the engine behind the Tramm Planner whenever a solver run is triggered.</p>
+      <p class="intro-text">Chora is Opsi's purpose-built route optimisation solver. It replaces Solo, Opsi's previous solver, and is designed specifically for the complexity of real-world logistics — multiple vehicle types, time windows, capacity constraints, fatigue rules, and loading bay management. Chora runs as the engine behind the Tramm Planner whenever a solver run is triggered.</p>
     </section>
 
     <!-- JOB TYPES -->
@@ -268,63 +272,63 @@
 
       <div class="constraint-group">
         <p class="constraint-group-title">Time Windows</p>
-        <div class="pill-list">
-          <span class="pill">Job time windows</span>
-          <span class="pill">Site operating hours</span>
-          <span class="pill">Driver shift windows</span>
-          <span class="pill">Overnight &amp; multi-day windows</span>
-          <span class="pill">Hard time windows</span>
-          <span class="pill">Soft time windows (with penalty)</span>
-        </div>
+        <ul class="check-list">
+          <li>Job time windows</li>
+          <li>Site operating hours</li>
+          <li>Driver shift windows</li>
+          <li>Overnight &amp; multi-day windows</li>
+          <li>Hard time windows</li>
+          <li>Soft time windows (with configurable penalty)</li>
+        </ul>
       </div>
 
       <div class="constraint-group">
         <p class="constraint-group-title">Capacity</p>
-        <div class="pill-list">
-          <span class="pill">Multiple dimensions (mass, volume, pallets, litres…)</span>
-          <span class="pill">Sum aggregation</span>
-          <span class="pill">Max aggregation</span>
-          <span class="pill">Horse &amp; trailer (articulated)</span>
-          <span class="pill">Rigid vehicles</span>
-          <span class="pill">Bulk compartments</span>
-          <span class="pill">Mixed compartments</span>
-        </div>
+        <ul class="check-list">
+          <li>Multiple dimensions (mass, volume, pallets, litres, and more)</li>
+          <li>Sum aggregation — total capacity as the sum of all items</li>
+          <li>Max aggregation — capacity based on the single largest item</li>
+          <li>Horse &amp; trailer (articulated vehicles)</li>
+          <li>Rigid vehicles</li>
+          <li>Bulk compartments — single product type per fill</li>
+          <li>Mixed compartments — multiple product types allowed</li>
+        </ul>
       </div>
 
       <div class="constraint-group">
         <p class="constraint-group-title">Restrictions</p>
-        <div class="pill-list">
-          <span class="pill">Job / site to vehicle</span>
-          <span class="pill">Product to compartment</span>
-          <span class="pill">Vehicle to loading dock</span>
-          <span class="pill">Custom attributes for resource matching</span>
-        </div>
+        <ul class="check-list">
+          <li>Job / site to vehicle</li>
+          <li>Product to compartment</li>
+          <li>Vehicle to loading dock</li>
+          <li>Custom attributes for resource matching</li>
+        </ul>
       </div>
 
       <div class="constraint-group">
         <p class="constraint-group-title">Fatigue &amp; Breaks</p>
-        <div class="pill-list">
-          <span class="pill">Working breaks (max working time)</span>
-          <span class="pill">Driving breaks (max continuous driving)</span>
-          <span class="pill">Timed breaks (fixed time or windowed)</span>
-        </div>
+        <ul class="check-list">
+          <li>Working breaks — triggered after maximum working time (driving + service combined)</li>
+          <li>Driving breaks — triggered after maximum continuous driving time</li>
+          <li>Timed breaks — fixed-time or windowed (e.g. lunch at 13:00, overnight rest)</li>
+        </ul>
       </div>
 
       <div class="constraint-group">
         <p class="constraint-group-title">Loading Bays</p>
-        <div class="pill-list">
-          <span class="pill">Time-slotted dock capacity</span>
-          <span class="pill">Simultaneous vehicle limit per bay</span>
-          <span class="pill">Outbound loading &amp; inbound offloading</span>
-        </div>
+        <ul class="check-list">
+          <li>Time-slotted dock capacity</li>
+          <li>Simultaneous vehicle limit per bay</li>
+          <li>Outbound loading and inbound offloading</li>
+        </ul>
       </div>
 
       <div class="constraint-group">
         <p class="constraint-group-title">Traffic</p>
-        <div class="pill-list">
-          <span class="pill">Time-dependent travel times (HERE Maps)</span>
-          <span class="pill">Matrix caching for faster subsequent solves</span>
-        </div>
+        <ul class="check-list">
+          <li>Time-dependent travel times using HERE Maps historical traffic data</li>
+          <li>Matrix caching — first solve downloads data; subsequent solves use the cached matrix</li>
+        </ul>
       </div>
 
     </section>

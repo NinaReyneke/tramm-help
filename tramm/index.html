@@ -1,1 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tramm — Tramm Help</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --blue-50:  #eff6ff;
+      --blue-100: #dbeafe;
+      --blue-200: #bfdbfe;
+      --blue-500: #3b82f6;
+      --blue-600: #2563eb;
+      --blue-700: #1d4ed8;
+      --blue-900: #1e3a8a;
+      --slate-100: #f1f5f9;
+      --slate-200: #e2e8f0;
+      --slate-400: #94a3b8;
+      --slate-500: #64748b;
+      --slate-600: #475569;
+      --slate-700: #334155;
+      --slate-900: #0f172a;
+      --green-100: #dcfce7;
+      --green-700: #15803d;
+      --purple-50:  #faf5ff;
+      --purple-100: #f3e8ff;
+      --purple-700: #7e22ce;
+      --teal-50:   #f0fdfa;
+      --teal-100:  #ccfbf1;
+      --teal-700:  #0f766e;
+      --amber-50:  #fffbeb;
+      --amber-100: #fef3c7;
+      --amber-700: #b45309;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #fff;
+      color: var(--slate-700);
+      line-height: 1.5;
+    }
+
+    /* ── HEADER ── */
+    .site-header {
+      background: linear-gradient(135deg, var(--blue-900) 0%, var(--blue-700) 100%);
+      color: #fff;
+      padding: 2rem 2rem 1.75rem;
+    }
+    .breadcrumb {
+      font-size: 0.78rem;
+      opacity: 0.7;
+      margin-bottom: 0.5rem;
+    }
+    .breadcrumb a { color: #fff; text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .breadcrumb span { margin: 0 0.4rem; opacity: 0.5; }
+    .site-header h1 { font-size: 1.75rem; font-weight: 700; margin-bottom: 0.4rem; }
+    .site-header .subtitle { font-size: 0.95rem; opacity: 0.85; max-width: 60ch; }
+
+    /* ── MAIN ── */
+    .page-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 2.5rem 2rem 5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    /* ── FILTER ── */
+    .filter-wrap {
+      position: relative;
+      max-width: 400px;
+    }
+    .filter-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--slate-400);
+      pointer-events: none;
+      width: 1rem;
+      height: 1rem;
+    }
+    .filter-input {
+      width: 100%;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      border: 1px solid var(--slate-200);
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-family: inherit;
+      color: var(--slate-900);
+      background: #fff;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .filter-input:focus {
+      border-color: var(--blue-500);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .filter-input::placeholder { color: var(--slate-400); }
+
+    /* ── CATEGORY SECTIONS ── */
+    .category { display: flex; flex-direction: column; gap: 1rem; }
+    .category.hidden { display: none; }
+
+    .category-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .category-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .dot-planning    { background: var(--blue-500); }
+    .dot-execution   { background: var(--green-700); }
+    .dot-customers   { background: var(--purple-700); }
+    .dot-data        { background: var(--teal-700); }
+
+    .category-header h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+    .category-count {
+      font-size: 0.75rem;
+      color: var(--slate-400);
+      font-weight: 500;
+    }
+
+    /* ── APP GRID ── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.85rem;
+    }
+
+    /* ── APP CARDS ── */
+    .app-card {
+      background: #fff;
+      border: 1px solid var(--slate-200);
+      border-radius: 0.6rem;
+      padding: 1.1rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    a.app-card {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+    a.app-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(30,58,138,0.1);
+      border-color: var(--blue-200);
+    }
+    .app-card-soon {
+      opacity: 0.65;
+    }
+    .app-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+    .app-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--slate-900);
+    }
+    .app-desc {
+      font-size: 0.8rem;
+      color: var(--slate-500);
+      line-height: 1.45;
+    }
+
+    /* ── TAGS ── */
+    .tag {
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.18rem 0.5rem;
+      border-radius: 9999px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .tag-available { background: var(--green-100);   color: var(--green-700); }
+    .tag-coming    { background: var(--slate-100);   color: var(--slate-500); }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--slate-400);
+      font-size: 0.95rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--slate-900);
+      color: var(--slate-400);
+      text-align: center;
+      padding: 1.5rem 2rem;
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .site-header h1 { font-size: 1.4rem; }
+      .page-content { padding: 1.5rem 1rem 3rem; }
+      .filter-wrap { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="breadcrumb">
+      <a href="../index.html">Tramm Help</a>
+      <span>›</span>
+      Tramm
+    </div>
+    <h1>Tramm</h1>
+    <p class="subtitle">The core platform — 24 apps covering planning, execution, data management, and customer &amp; transporter operations.</p>
+  </header>
+
+  <main class="page-content">
+
+    <div class="filter-wrap">
+      <svg class="filter-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+      </svg>
+      <input class="filter-input" id="filter-input" type="search" placeholder="Filter apps…" autocomplete="off" />
+    </div>
+
+    <div class="no-results" id="no-results">No apps match your search.</div>
+
+    <!-- PLANNING -->
+    <section class="category" data-category>
+      <div class="category-header">
+        <span class="category-dot dot-planning"></span>
+        <h2>Planning</h2>
+        <span class="category-count">6 apps</span>
+      </div>
+      <div class="app-grid">
+
+        <a class="app-card" href="../planner/quick-reference.html"
+           data-search="planner scheduling loads trips vehicles optimise build">
+          <div class="app-card-top">
+            <span class="app-name">Planner</span>
+            <span class="tag tag-available">Quick Reference</span>
+          </div>
+          <p class="app-desc">Build loads, plan trips, and allocate vehicles. The main scheduling workspace.</p>
+        </a>
+
+        <div class="app-card app-card-soon"
+             data-search="movements multi modal transport legs ship train plane route">
+          <div class="app-card-top">
+            <span class="app-name">Movements</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Plan multi-leg shipments across different modes of transport.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="crossdock cross dock transfer vehicles intermediate site">
+          <div class="app-card-top">
+            <span class="app-name">Crossdock</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Manage cross-docking operations where goods transfer between vehicles at intermediate sites.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="manual planner manual build trips jobs vehicle assignment">
+          <div class="app-card-top">
+            <span class="app-name">Manual Planner</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Build trips manually with full control over job and vehicle assignment.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="full load planner ftl full truck load single job vehicle">
+          <div class="app-card-top">
+            <span class="app-name">Full Load Planner</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Plan full-truck-load trips where a single job fills an entire vehicle.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="master route builder recurring template schedule weekly">
+          <div class="app-card-top">
+            <span class="app-name">Master Route Builder</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Create recurring trip templates that generate actual trips on a set schedule.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- EXECUTION -->
+    <section class="category" data-category>
+      <div class="category-header">
+        <span class="category-dot dot-execution"></span>
+        <h2>Execution</h2>
+        <span class="category-count">8 apps</span>
+      </div>
+      <div class="app-grid">
+
+        <div class="app-card app-card-soon"
+             data-search="execution manager monitor trips dispatch delivery progress">
+          <div class="app-card-top">
+            <span class="app-name">Execution Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Monitor and manage trips in progress, from dispatch to delivery completion.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="event viewer system events activity logs audit">
+          <div class="app-card-top">
+            <span class="app-name">Event Viewer</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">View and investigate system events and activity logs.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="loading bay manager depot bay scheduling vehicles">
+          <div class="app-card-top">
+            <span class="app-name">Loading Bay Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Manage vehicle loading bay assignments and scheduling at depots.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="qr scanner scan barcode trip job verification loading">
+          <div class="app-card-top">
+            <span class="app-name">QR Scanner</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Scan QR codes for trip and job verification at loading and delivery.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="dashboards kpi metrics operational performance overview">
+          <div class="app-card-top">
+            <span class="app-name">Dashboards</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Operational dashboards showing key metrics and performance indicators.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="device manager driver devices mobile app settings configuration">
+          <div class="app-card-top">
+            <span class="app-name">Device Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Manage driver devices and configure mobile app settings.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="claims portal delivery claims exceptions log manage">
+          <div class="app-card-top">
+            <span class="app-name">Claims Portal</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Log and manage delivery claims and exceptions.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="fuel manager bulk liquid fuel usage track tanker">
+          <div class="app-card-top">
+            <span class="app-name">Fuel Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Track and manage fuel usage and bulk liquid deliveries.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CUSTOMERS & TRANSPORTERS -->
+    <section class="category" data-category>
+      <div class="category-header">
+        <span class="category-dot dot-customers"></span>
+        <h2>Customers &amp; Transporters</h2>
+        <span class="category-count">6 apps</span>
+      </div>
+      <div class="app-grid">
+
+        <div class="app-card app-card-soon"
+             data-search="order manager orders client delivery collection service request">
+          <div class="app-card-top">
+            <span class="app-name">Order Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Create and manage client delivery, collection, and service orders.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="financial manager billing rates invoicing transport costs">
+          <div class="app-card-top">
+            <span class="app-name">Financial Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Manage transport billing, rates, and financial transactions.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="booking portal client self service bookings submit track">
+          <div class="app-card-top">
+            <span class="app-name">Booking Portal</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Allow clients to submit and track their own delivery bookings.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="transporter portal subcontractor sub contractor trips jobs visibility">
+          <div class="app-card-top">
+            <span class="app-name">Transporter Portal</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Give sub-contractors visibility of their allocated trips and jobs.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="client portal customer orders delivery status visibility track">
+          <div class="app-card-top">
+            <span class="app-name">Client Portal</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Give clients visibility of their orders and delivery status.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="claim request client claims delivery exceptions submit resolve">
+          <div class="app-card-top">
+            <span class="app-name">Claim Request</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Allow clients to submit delivery claims and track their resolution.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- DATA -->
+    <section class="category" data-category>
+      <div class="category-header">
+        <span class="category-dot dot-data"></span>
+        <h2>Data</h2>
+        <span class="category-count">4 apps</span>
+      </div>
+      <div class="app-grid">
+
+        <div class="app-card app-card-soon"
+             data-search="data manager master data vehicles sites zones configuration reference">
+          <div class="app-card-top">
+            <span class="app-name">Data Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Configure and maintain master data: vehicles, sites, zones, and more.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="document manager templates trip sheet epod reports documents">
+          <div class="app-card-top">
+            <span class="app-name">Document Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Manage document templates used in trip sheets, ePODs, and reports.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="geocoder address gps coordinates validate resolve site locations">
+          <div class="app-card-top">
+            <span class="app-name">Geocoder</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Resolve and validate site addresses and GPS coordinates.</p>
+        </div>
+
+        <div class="app-card app-card-soon"
+             data-search="distance time manager matrix travel time between sites routes">
+          <div class="app-card-top">
+            <span class="app-name">Distance / Time Manager</span>
+            <span class="tag tag-coming">Coming soon</span>
+          </div>
+          <p class="app-desc">Configure distance and travel time matrices between sites.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>Tramm Help &mdash; for support, contact your Tramm implementation team.</p>
+  </footer>
+
+  <script>
+    const filterInput = document.getElementById('filter-input');
+    const noResults   = document.getElementById('no-results');
+    const categories  = document.querySelectorAll('[data-category]');
+
+    filterInput.addEventListener('input', () => {
+      const q = filterInput.value.trim().toLowerCase();
+      let anyVisible = false;
+
+      categories.forEach(cat => {
+        const cards = cat.querySelectorAll('[data-search]');
+        let catHasMatch = false;
+
+        cards.forEach(card => {
+          const haystack = (card.dataset.search + ' ' + card.textContent).toLowerCase();
+          const match = !q || haystack.includes(q);
+          card.style.display = match ? '' : 'none';
+          if (match) catHasMatch = true;
+        });
+
+        cat.classList.toggle('hidden', !catHasMatch);
+        if (catHasMatch) anyVisible = true;
+      });
+
+      noResults.style.display = (q && !anyVisible) ? 'block' : 'none';
+    });
+  </script>
+
+</body>
+</html>
